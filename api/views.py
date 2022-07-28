@@ -110,15 +110,59 @@ class signOut(APIView):
         return response
 
 
-class getAllBudgets(generics.ListAPIView):
+# custom list model mixin:
+class ListModelMixin2:
+    """
+    List a queryset.
+    """
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        response = Response()
+        # print(f"id= {self.payload['id']}") #getting user id --test ok.
+
+        print(SHARE.objects.filter(shared_with_id=self.payload['id']))
+        sharedata = SHARE.objects.filter(shared_with_id=self.payload['id'])
+        sharedFrom = dict()
+
+        j = 1
+        for i in sharedata:
+            budgetdict = dict()
+            print(i.budget_id)
+            budgetdata = Budget.objects.filter(id=i.budget_id).first()
+            print(budgetdata.name)
+            tempuser = CustomUser.objects.filter(id=budgetdata.user_id).first()
+            budgetdict["id"] = budgetdata.id
+            budgetdict["name"] = budgetdata.name
+            sharedFrom[tempuser.email] = budgetdict
+
+        response.data = {
+            "self-Budgets": serializer.data,
+            "Shared-With": sharedFrom
+        }
+
+        """response.data = {
+            "Budget": serializer.data
+        }"""
+        return Response(response.data)
+
+
+class getAllBudgets(ListModelMixin2, generics.ListAPIView):
     serializer_class = budgetSerializer
 
     def get_queryset(self):
         token = self.request.COOKIES.get('jwt')
 
-        payload = autheticator(token)
+        self.payload = autheticator(token)
 
-        users = CustomUser.objects.filter(id=payload['id']).first()
+        users = CustomUser.objects.filter(id=self.payload['id']).first()
         serializer = customUserSerializer(users)
         budget = Budget.objects.filter(user_id=serializer.data['id'])
         print(budget)
