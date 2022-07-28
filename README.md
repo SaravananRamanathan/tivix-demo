@@ -1,7 +1,7 @@
 # tivix-demo
  a demo application for tivix.
  
- A postman-collection file is also attached to the files, which might be helpfull to test with
+ A postman-collection file is also attached to the files, which might be helpfull while testing
  
 after clone of this project, use the following steps to get it working with docker:
  1. docker build <name> .   (or) docker build.
