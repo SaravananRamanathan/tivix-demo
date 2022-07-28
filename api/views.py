@@ -145,7 +145,7 @@ class ListModelMixin2:
 
         response.data = {
             "self-Budgets": serializer.data,
-            "Shared-With": sharedFrom
+            "Shared-from": sharedFrom
         }
 
         """response.data = {
@@ -223,7 +223,17 @@ class getBudgetDetailsById(ListModelMixin, generics.ListCreateAPIView):
             user_id=serializer.data['id'], id=self.kwargs['id'])
         if not budget:
             ""
-            raise NotFound("You dont have access to any budget with that id.")
+            # in here need to check if they have shared access from other users
+            # before rejecting their request.
+            shared = SHARE.objects.filter(
+                shared_with_id=serializer.data["id"], budget_id=self.kwargs['id']).first()
+            print(shared)  # test ok.
+            if not shared:
+                raise NotFound(
+                    "You dont have access to any budget with that id.")
+            else:
+                budget = Budget.objects.filter(id=self.kwargs['id'])
+                print(budget) #test ok.
         # print(budget) #test ok!..!
         print(budget[0].item_set.all())
         return budget[0].item_set.all()
