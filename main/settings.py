@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'userAccess.apps.UseraccessConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# custom user:
+# custom auth backend-- just to make it posible to login via email.
+AUTHENTICATION_BACKENDS = ('userAccess.authBackend.EmailBackend',)
+AUTH_USER_MODEL = "userAccess.CustomUser"
