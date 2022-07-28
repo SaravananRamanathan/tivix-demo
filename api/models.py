@@ -20,8 +20,11 @@ class Budget(models.Model):
 class share(models.Model):
     "details of shared budgets"
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
-    shared_with = models.OneToOneField(
-        User, on_delete=models.SET_NULL, null=True)
+    shared_with = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, unique=False)
+
+    class Meta:
+        unique_together = ["budget", "shared_with"]
 
 
 class Accounts(models.IntegerChoices):
