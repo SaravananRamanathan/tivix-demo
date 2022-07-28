@@ -5,10 +5,9 @@ after clone of this project, use the following steps to get it working with dock
  1. docker build <name> .   (or) docker build.
  2.docker-compose up -d --build
 
-For setting it up with a virtual environment, here are the steps required:
  
 note: the manage.py is located in the top most root folder
- 
+For setting it up with a virtual environment, here are the steps required:
 1.clone the proect to any folder.
  
 2.setup a python virtual enviroment: python -m venv env
