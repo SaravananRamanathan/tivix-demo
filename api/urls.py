@@ -36,5 +36,5 @@ urlpatterns = [
     path("unshare", views.unshare.as_view(), name="unshare"),
 
     # myshare
-    path("myshare", views.myshare.as_view(), name="myshare"),
+    re_path("myshare", views.myshare.as_view(), name="myshare"),
 ]

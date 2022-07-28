@@ -278,7 +278,7 @@ class deleteBudgetById(DestroyModelMixin, generics.DestroyAPIView):
         print(budget)
         if not budget:
             ""
-            raise NotFound("You dont have access to any product with that id.")
+            raise NotFound("You dont have access to any budget with that id.")
         # print(product) #test ok!
         # product.delete()
         response = Response()
@@ -364,57 +364,6 @@ class share(CreateModelMixin, generics.CreateAPIView):
     "All done via custom model mixin"
     serializer_class = shareSerializer
     # lookup_field="id"
-
-
-# unshare
-# my custom destroy mixin.
-class DestroyModelMixin2(object):
-    """
-    Destroy a model instance.
-    """
-
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        try:
-            self.perform_destroy(instance)
-        except ProtectedError as e:
-            return Response(status=status.HTTP_423_LOCKED, data={'detail': str(e)})
-        # return Response(status=status.HTTP_204_NO_CONTENT) #this is django default...
-        # custom Response return on deletion.
-        return Response({'message': 'Deleted Successfully'})
-
-    def perform_destroy(self, instance):
-        instance.delete()
-
-
-class unshare(DestroyModelMixin2, generics.DestroyAPIView):
-    serializer_class = budgetSerializer
-    #lookup_url_kwarg = pk
-    lookup_field = "id"
-
-    def get_queryset(self):
-        token = self.request.COOKIES.get('jwt')
-        payload = autheticator(token)
-        users = CustomUser.objects.filter(id=payload['id']).first()
-        # print(users) #test ok
-        serializer = customUserSerializer(users)
-        # print(serializer.data['id'])  #test ok
-        # print(self.kwargs['id'])   #test ok
-        budget = Budget.objects.filter(
-            user_id=serializer.data['id'], id=self.kwargs['id'])
-        print(budget)
-        if not budget:
-            ""
-            raise NotFound("You dont have access to any product with that id.")
-        # print(product) #test ok!
-        # product.delete()
-        response = Response()
-        response.content = budget
-        response.data = {
-            'message': 'Deleted successfully.'
-        }
-        # return response #test ok.
-        return budget
 
 
 # custom list model mixin:
@@ -507,3 +456,44 @@ class myshare(ListModelMixin3, generics.ListAPIView):
         print(budget)
 
         return budget  # Product.objects.get(user=user)
+
+
+# unshare
+class unshare(APIView):
+    def post(self, request):
+        "stop sharing the bedget to specific users"
+        token = request.COOKIES.get('jwt')
+
+        payload = autheticator(token)
+
+        user = CustomUser.objects.filter(id=payload['id']).first()
+        serializer = customUserSerializer(user)
+        budget = Budget.objects.filter(
+            user_id=serializer.data['id'], id=request.data["budget"])
+        if not budget:
+            raise NotFound("no match with that id found on your budgets")
+        else:
+            print("budget exists")
+            emailcheck = CustomUser.objects.filter(
+                email=request.data["shared_with"]).first()
+            if emailcheck:
+                print(emailcheck)
+                request.data["shared_with"] = emailcheck.id
+        #serializer_class = shareSerializer()
+        tempshare = SHARE.objects.filter(
+            budget=request.data["budget"], shared_with=request.data["shared_with"])
+        if not tempshare:
+            ""
+            raise NotFound(
+                "no match with that email and id found on your budgets")
+        else:
+            "valid case"
+            tempshare.delete()
+
+        # serializer_class.is_valid(raise_exception=True)
+        # serializer_class.delete()
+        response = Response()
+        response.data = {
+            "msg": "stoppped sharing successfully"
+        }
+        return response
