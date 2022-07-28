@@ -19,8 +19,7 @@ class budget(admin.ModelAdmin):
         model = models.Budget
 
 
-"""
-#if needed to see them seperate...
+# if needed to see them seperate...
 @admin.register(models.share)
 class sharedView(admin.ModelAdmin):
     pass
@@ -29,7 +28,7 @@ class sharedView(admin.ModelAdmin):
 @admin.register(models.Item)
 class ItemView(admin.ModelAdmin):
     pass
-"""
+
 
 # admin.site.register(models.Budget)
 # admin.site.register(models.Item)

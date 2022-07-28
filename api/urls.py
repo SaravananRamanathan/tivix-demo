@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     # test
     path("test", views.test.as_view(), name="test"),
+
     # signUp
     path("signUp", views.signUp.as_view(), name="signup"),
 
@@ -22,5 +23,12 @@ urlpatterns = [
 
     # get the budget details based on id sent, if the user has access to that id.
     re_path("getBudgetDetailsById/(?P<id>\w+)$",
-            views.getBudgetDetailsById.as_view()),
+            views.getBudgetDetailsById.as_view(),name="getBudgetDetailsById"),
+
+    # delete budget based on id sent, if the user has access to that id.
+    re_path("deleteBudgetById/(?P<id>\w+)$",
+            views.deleteBudgetById.as_view(), name="deleteBudgetById"),
+
+    # share
+    path("share", views.share.as_view(), name="share"),
 ]

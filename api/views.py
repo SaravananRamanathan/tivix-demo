@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from .serializers import budgetSerializer, customUserSerializer, itemSerializer
+from .serializers import budgetSerializer, customUserSerializer, itemSerializer, shareSerializer
 from rest_framework.response import Response
 from userAccess.models import CustomUser
 from rest_framework.exceptions import AuthenticationFailed, NotFound
@@ -8,7 +8,10 @@ import datetime
 import os
 from dotenv import load_dotenv
 from rest_framework import generics
-from .models import Budget
+from .models import Budget, share as SHARE
+from rest_framework import status
+from django.db.models.deletion import ProtectedError
+from rest_framework.settings import APISettings, DEFAULTS, IMPORT_STRINGS
 
 load_dotenv()  # loading from .env from root folder.
 JWT_SECRET = os.environ.get("JWT_SECRET")
@@ -123,7 +126,42 @@ class getAllBudgets(generics.ListAPIView):
         return budget  # Product.objects.get(user=user)
 
 
-class getBudgetDetailsById(generics.ListCreateAPIView):
+# custom list model mixin:
+class ListModelMixin:
+    """
+    List a queryset.
+    """
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        response = Response()
+        print(f"id= {self.kwargs['id']}")
+
+        print(SHARE.objects.filter(budget_id=self.kwargs['id']))
+        sharedata = SHARE.objects.filter(budget_id=self.kwargs['id'])
+        sharedWith = dict()
+        j = 1
+        for i in sharedata:
+            print(i.shared_with_id)
+            tempuser = CustomUser.objects.filter(id=i.shared_with_id).first()
+            print(tempuser.email)
+            sharedWith["email{}".format(j)] = tempuser.email
+            j += 1
+        response.data = {
+            "Budget": serializer.data,
+            "Shared-With": sharedWith
+        }
+        return Response(response.data)
+
+
+class getBudgetDetailsById(ListModelMixin, generics.ListCreateAPIView):
     serializer_class = itemSerializer
 
     def get_queryset(self):
@@ -145,3 +183,133 @@ class getBudgetDetailsById(generics.ListCreateAPIView):
         # print(budget) #test ok!..!
         print(budget[0].item_set.all())
         return budget[0].item_set.all()
+
+
+# deleteBudgetById
+# my custom destroy mixin.
+class DestroyModelMixin(object):
+    """
+    Destroy a model instance.
+    """
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        try:
+            self.perform_destroy(instance)
+        except ProtectedError as e:
+            return Response(status=status.HTTP_423_LOCKED, data={'detail': str(e)})
+        # return Response(status=status.HTTP_204_NO_CONTENT) #this is django default...
+        # custom Response return on deletion.
+        return Response({'message': 'Deleted Successfully'})
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
+
+class deleteBudgetById(DestroyModelMixin, generics.DestroyAPIView):
+    serializer_class = budgetSerializer
+    #lookup_url_kwarg = pk
+    lookup_field = "id"
+
+    def get_queryset(self):
+        token = self.request.COOKIES.get('jwt')
+
+        payload = autheticator(token)
+
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        # print(users) #test ok
+        serializer = customUserSerializer(users)
+        # print(serializer.data['id'])  #test ok
+        # print(self.kwargs['id'])   #test ok
+        budget = Budget.objects.filter(
+            user_id=serializer.data['id'], id=self.kwargs['id'])
+        print(budget)
+        if not budget:
+            ""
+            raise NotFound("You dont have access to any product with that id.")
+        # print(product) #test ok!
+        # product.delete()
+        response = Response()
+        response.content = budget
+        response.data = {
+            'message': 'Deleted successfully.'
+        }
+        # return response #test ok.
+        return budget
+
+# sharing:
+
+
+"""#scarpping it off as wrong choice for now.
+class share(APIView):
+    def post(self, request):
+        "allow users to share budget with each other via email-id"
+        serializer_class = shareSerializer(data=request.data)
+        serializer_class.is_valid(raise_exception=True)
+        serializer_class.save()
+        return Response(serializer_class.data)
+"""
+
+# custom create model mixin
+api_settings = APISettings(None, DEFAULTS, IMPORT_STRINGS)
+
+
+class CreateModelMixin:
+    """
+    Create a model instance.
+    """
+
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        token = self.request.COOKIES.get('jwt')
+        payload = autheticator(token)
+
+        # finding budget object via id provided.
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        serializer = customUserSerializer(users)
+        budget = Budget.objects.filter(
+            user_id=serializer.data['id'], id=request.data['budget'])
+        if not budget:
+            ""
+            raise NotFound("You dont have access to any budget with that id.")
+        print(budget[0].pk)
+        # set the budget object based on id entered by user.
+        request.data['budget'] = budget[0].pk
+
+        # finding id via email provided.
+        email = CustomUser.objects.filter(email=request.data["shared_with"])
+        if not email:
+            raise NotFound("No user with that email provided")
+        print(email[0].pk)
+        request.data['shared_with'] = email[0].pk
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        self.perform_create(serializer)
+
+        # creating a custom response to show to user.
+        response = Response()
+        response.data = {
+            'message': 'added successfully',
+            'shared_with': email[0].email
+        }
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(response.data, status=status.HTTP_201_CREATED, headers=headers)
+        # return response
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
+
+
+class share(CreateModelMixin, generics.CreateAPIView):
+    "All done via custom model mixin"
+    serializer_class = shareSerializer
+    # lookup_field="id"

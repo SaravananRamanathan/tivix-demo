@@ -1,6 +1,15 @@
+from dataclasses import fields
 from rest_framework import serializers
 from userAccess.models import CustomUser
-from .models import Budget, Item
+from .models import Budget, Item, share
+
+
+class shareSerializer(serializers.ModelSerializer):
+    ""
+    class Meta:
+        ""
+        model = share
+        fields = '__all__'
 
 
 class customUserSerializer(serializers.ModelSerializer):
