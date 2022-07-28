@@ -23,7 +23,7 @@ urlpatterns = [
 
     # get the budget details based on id sent, if the user has access to that id.
     re_path("getBudgetDetailsById/(?P<id>\w+)$",
-            views.getBudgetDetailsById.as_view(),name="getBudgetDetailsById"),
+            views.getBudgetDetailsById.as_view(), name="getBudgetDetailsById"),
 
     # delete budget based on id sent, if the user has access to that id.
     re_path("deleteBudgetById/(?P<id>\w+)$",
@@ -31,4 +31,10 @@ urlpatterns = [
 
     # share
     path("share", views.share.as_view(), name="share"),
+
+    # unshare
+    path("unshare", views.unshare.as_view(), name="unshare"),
+
+    # myshare
+    path("myshare", views.myshare.as_view(), name="myshare"),
 ]

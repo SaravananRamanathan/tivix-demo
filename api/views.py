@@ -233,7 +233,7 @@ class getBudgetDetailsById(ListModelMixin, generics.ListCreateAPIView):
                     "You dont have access to any budget with that id.")
             else:
                 budget = Budget.objects.filter(id=self.kwargs['id'])
-                print(budget) #test ok.
+                print(budget)  # test ok.
         # print(budget) #test ok!..!
         print(budget[0].item_set.all())
         return budget[0].item_set.all()
@@ -267,9 +267,7 @@ class deleteBudgetById(DestroyModelMixin, generics.DestroyAPIView):
 
     def get_queryset(self):
         token = self.request.COOKIES.get('jwt')
-
         payload = autheticator(token)
-
         users = CustomUser.objects.filter(id=payload['id']).first()
         # print(users) #test ok
         serializer = customUserSerializer(users)
@@ -291,9 +289,8 @@ class deleteBudgetById(DestroyModelMixin, generics.DestroyAPIView):
         # return response #test ok.
         return budget
 
+
 # sharing:
-
-
 """#scarpping it off as wrong choice for now.
 class share(APIView):
     def post(self, request):
@@ -367,3 +364,146 @@ class share(CreateModelMixin, generics.CreateAPIView):
     "All done via custom model mixin"
     serializer_class = shareSerializer
     # lookup_field="id"
+
+
+# unshare
+# my custom destroy mixin.
+class DestroyModelMixin2(object):
+    """
+    Destroy a model instance.
+    """
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        try:
+            self.perform_destroy(instance)
+        except ProtectedError as e:
+            return Response(status=status.HTTP_423_LOCKED, data={'detail': str(e)})
+        # return Response(status=status.HTTP_204_NO_CONTENT) #this is django default...
+        # custom Response return on deletion.
+        return Response({'message': 'Deleted Successfully'})
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
+
+class unshare(DestroyModelMixin2, generics.DestroyAPIView):
+    serializer_class = budgetSerializer
+    #lookup_url_kwarg = pk
+    lookup_field = "id"
+
+    def get_queryset(self):
+        token = self.request.COOKIES.get('jwt')
+        payload = autheticator(token)
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        # print(users) #test ok
+        serializer = customUserSerializer(users)
+        # print(serializer.data['id'])  #test ok
+        # print(self.kwargs['id'])   #test ok
+        budget = Budget.objects.filter(
+            user_id=serializer.data['id'], id=self.kwargs['id'])
+        print(budget)
+        if not budget:
+            ""
+            raise NotFound("You dont have access to any product with that id.")
+        # print(product) #test ok!
+        # product.delete()
+        response = Response()
+        response.content = budget
+        response.data = {
+            'message': 'Deleted successfully.'
+        }
+        # return response #test ok.
+        return budget
+
+
+# custom list model mixin:
+class ListModelMixin3:
+    """
+    List a queryset.
+    """
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+
+        print("starting test")
+        #budgetdata = dict()
+        #userdata = dict()
+        ans = dict()
+        k = 1
+        l = 1
+        for i in serializer.data:
+            # print(i)
+            budgetdata = dict()
+            print(f'id= {i.get("id")}')
+            budgetdata["id"] = i.get("id")
+            budgetdata["name"] = i.get("name")
+            tempshare = SHARE.objects.filter(budget_id=i.get("id"))
+            if tempshare:
+                userdata = dict()
+                for j in tempshare:
+
+                    print(j.shared_with_id)
+                    tempuser = CustomUser.objects.filter(
+                        id=j.shared_with_id).first()
+                    if tempuser:
+                        print(tempuser.email)
+                        userdata["{}".format(k)] = tempuser.email
+                        k += 1
+                #budgetdata["{}".format(i.get("id"))] = userdata
+                budgetdata["shared-to"] = userdata
+
+                ans["{}".format(l)] = budgetdata
+                l += 1
+                k = 1  # reset counter for emails.
+        """response = Response()
+        # print(f"id= {self.payload['id']}") #getting user id --test ok.
+
+        print(SHARE.objects.filter(shared_with_id=self.payload['id']))
+        sharedata = SHARE.objects.filter(shared_with_id=self.payload['id'])
+        sharedFrom = dict()
+
+        j = 1
+        for i in sharedata:
+            budgetdict = dict()
+            print(i.budget_id)
+            budgetdata = Budget.objects.filter(id=i.budget_id).first()
+            print(budgetdata.name)
+            tempuser = CustomUser.objects.filter(id=budgetdata.user_id).first()
+            budgetdict["id"] = budgetdata.id
+            budgetdict["name"] = budgetdata.name
+            sharedFrom[tempuser.email] = budgetdict
+
+        response.data = {
+            "self-Budgets": serializer.data,
+            "Shared-from": sharedFrom
+        }"""
+
+        """response.data = {
+            "Budget": serializer.data
+        }"""
+        # return Response(response.data)
+        return Response(ans)
+
+
+class myshare(ListModelMixin3, generics.ListAPIView):
+    serializer_class = budgetSerializer
+
+    def get_queryset(self):
+        token = self.request.COOKIES.get('jwt')
+
+        self.payload = autheticator(token)
+
+        users = CustomUser.objects.filter(id=self.payload['id']).first()
+        serializer = customUserSerializer(users)
+        budget = Budget.objects.filter(user_id=serializer.data['id'])
+        print(budget)
+
+        return budget  # Product.objects.get(user=user)
