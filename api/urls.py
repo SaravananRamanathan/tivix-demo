@@ -37,4 +37,10 @@ urlpatterns = [
 
     # myshare
     re_path("myshare", views.myshare.as_view(), name="myshare"),
+
+    # addBudget
+    path("addBudget", views.addBudget.as_view(), name="addbudget"),
+
+    # addBudgetItemById
+    path("addBudgetItemById", views.addBudget.as_view(), name="addBudgetItemById"),
 ]

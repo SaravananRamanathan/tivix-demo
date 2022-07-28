@@ -497,3 +497,57 @@ class unshare(APIView):
             "msg": "stoppped sharing successfully"
         }
         return response
+
+
+# custom create model mixin
+#api_settings = APISettings(None, DEFAULTS, IMPORT_STRINGS)
+
+
+class CreateModelMixin1:
+    """
+    Create a model instance.
+    """
+
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        token = self.request.COOKIES.get('jwt')
+        payload = autheticator(token)
+
+        # finding budget object via id provided.
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        serializer = customUserSerializer(users)
+
+        # adding user id to request.data
+        request.data['user'] = users.id
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        self.perform_create(serializer)
+
+        # creating a custom response to show to user.
+        response = Response()
+        response.data = {
+            'message': 'budget created successfully',
+            'budget name': request.data["name"]
+        }
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(response.data, status=status.HTTP_201_CREATED, headers=headers)
+        # return response
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
+
+
+class addBudget(CreateModelMixin1, generics.CreateAPIView):
+    "All done via custom model mixin"
+    serializer_class = budgetSerializer
+    # lookup_field="id"
+
