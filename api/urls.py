@@ -42,5 +42,6 @@ urlpatterns = [
     path("addBudget", views.addBudget.as_view(), name="addbudget"),
 
     # addBudgetItemById
-    path("addBudgetItemById", views.addBudget.as_view(), name="addBudgetItemById"),
+    path("addBudgetItemById", views.addBudgetItemById.as_view(),
+         name="addBudgetItemById"),
 ]

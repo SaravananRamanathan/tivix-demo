@@ -1,0 +1,1216 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2022-07-28T03:01:51.053Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"item\", \"object\": \"funds\"}}, {\"added\": {\"name\": \"item\", \"object\": \"buy tea\"}}, {\"added\": {\"name\": \"share\", \"object\": \"share object (1)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2022-07-28T03:03:20.146Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"item\", \"object\": \"funds\"}}, {\"deleted\": {\"name\": \"item\", \"object\": \"buy tea\"}}, {\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2022-07-28T03:07:21.904Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"User\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2022-07-28T03:29:03.041Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "budget2",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2022-07-28T03:29:18.585Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2022-07-28T03:30:21.014Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"User\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2022-07-28T03:48:25.976Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"item\", \"object\": \"funds\"}}, {\"added\": {\"name\": \"item\", \"object\": \"buy tea\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2022-07-28T03:53:01.779Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (2)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2022-07-28T04:31:18.760Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2022-07-28T04:39:44.657Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+      "action_time": "2022-07-28T04:57:23.699Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}, {\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+      "action_time": "2022-07-28T04:57:34.780Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+      "action_time": "2022-07-28T04:57:40.888Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (6)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+      "action_time": "2022-07-28T04:57:50.106Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+      "action_time": "2022-07-28T04:59:19.251Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+      "action_time": "2022-07-28T05:23:05.757Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+      "action_time": "2022-07-28T05:24:05.961Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+      "action_time": "2022-07-28T05:26:06.412Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+      "action_time": "2022-07-28T05:27:19.478Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+      "action_time": "2022-07-28T05:28:17.711Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+      "action_time": "2022-07-28T06:02:44.470Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (14)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+      "action_time": "2022-07-28T06:10:18.474Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}, {\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+      "action_time": "2022-07-28T06:11:02.890Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (15)\"}}, {\"added\": {\"name\": \"share\", \"object\": \"share object (16)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+      "action_time": "2022-07-28T06:45:36.396Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (17)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+      "action_time": "2022-07-28T06:53:22.434Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"name\": \"share\", \"object\": \"share object (15)\", \"fields\": [\"Shared with\"]}}, {\"changed\": {\"name\": \"share\", \"object\": \"share object (16)\", \"fields\": [\"Shared with\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+      "action_time": "2022-07-28T06:53:43.401Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"name\": \"share\", \"object\": \"share object (17)\", \"fields\": [\"Shared with\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+      "action_time": "2022-07-28T06:53:58.265Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (18)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+      "action_time": "2022-07-28T06:54:12.867Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+      "action_time": "2022-07-28T06:59:18.017Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (19)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+      "action_time": "2022-07-28T06:59:30.766Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (20)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+      "action_time": "2022-07-28T06:59:48.560Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+      "action_time": "2022-07-28T07:02:26.868Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[{\"deleted\": {\"name\": \"share\", \"object\": \"share object (None)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+      "action_time": "2022-07-28T07:05:58.476Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+      "action_time": "2022-07-28T07:06:16.609Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "budget1",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+      "action_time": "2022-07-28T07:06:30.165Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (23)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+      "action_time": "2022-07-28T07:08:11.314Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (24)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+      "action_time": "2022-07-28T07:12:13.172Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "4",
+      "object_repr": "bud random",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"item\", \"object\": \"fund\"}}, {\"added\": {\"name\": \"item\", \"object\": \"tea\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+      "action_time": "2022-07-28T07:12:19.976Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "4",
+      "object_repr": "bud random",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (25)\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+      "action_time": "2022-07-28T07:27:25.941Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "budget3",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"item\", \"object\": \"bank cheque\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+      "action_time": "2022-07-28T07:52:39.975Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "5",
+      "object_repr": "1st user budget",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"item\", \"object\": \"xx\"}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+      "action_time": "2022-07-28T09:06:27.195Z",
+      "user": 3,
+      "content_type": 7,
+      "object_id": "5",
+      "object_repr": "1st user budget",
+      "action_flag": 2,
+      "change_message": "[{\"added\": {\"name\": \"share\", \"object\": \"share object (26)\"}}]"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 6,
+      "codename": "add_customuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 6,
+      "codename": "change_customuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 6,
+      "codename": "delete_customuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 6,
+      "codename": "view_customuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add budget",
+      "content_type": 7,
+      "codename": "add_budget"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change budget",
+      "content_type": 7,
+      "codename": "change_budget"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete budget",
+      "content_type": 7,
+      "codename": "delete_budget"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view budget",
+      "content_type": 7,
+      "codename": "view_budget"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add share",
+      "content_type": 8,
+      "codename": "add_share"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change share",
+      "content_type": 8,
+      "codename": "change_share"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete share",
+      "content_type": 8,
+      "codename": "delete_share"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view share",
+      "content_type": 8,
+      "codename": "view_share"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add item",
+      "content_type": 9,
+      "codename": "add_item"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change item",
+      "content_type": 9,
+      "codename": "change_item"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete item",
+      "content_type": 9,
+      "codename": "delete_item"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view item",
+      "content_type": 9,
+      "codename": "view_item"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "userAccess",
+      "model": "customuser"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "api",
+      "model": "budget"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "api",
+      "model": "share"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "api",
+      "model": "item"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "bkhw31qwc4txjqnhcljev6pkttr5fjax",
+    "fields": {
+      "session_data": ".eJxVizsOwjAQBe_iGkU2sbM2HUicw9r17soRnwInFeLuxIICilfMG83TZFyXmtcmjzyzOZjR7H4_wnKRexcdj6VIa0PXp48Yzjecr1_4Tyu2unXJMllKlnzxrM5y4gBBVLdFBcDRiVUEilxGmIJ40LRP5BAmJxHN6w2NNTZd:1oGsOW:veI5SEoVN_7hV2FENg3zsXQEq2TyRt5ugoRTFoFxCqI",
+      "expire_date": "2022-08-11T01:32:56.327Z"
+    }
+  },
+  {
+    "model": "userAccess.customuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$CWp8Io7wMtGz7maH4rTOQb$CFBao22449qTyceyP2bGV9aq26+NTQqmsadX2UUkVYk=",
+      "last_login": "2022-07-28T01:32:56.324Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2022-07-28T01:32:42.464Z",
+      "username": "",
+      "email": "srvnnramanathan@gmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "userAccess.customuser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$4lH9T1D1rdxpUYTSdobOAH$Dac5DTVBD86gx84isJ/v8p8xObdNeOBkgWB2BckI0Hs=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-07-28T01:54:45.369Z",
+      "username": "test1",
+      "email": "test1@gmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "userAccess.customuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$T7X69kaEWEdezRxRaiDXry$BxCXrBkVUYkksCFaNGdYQDoZz/OatbeWXN11462IaMY=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-07-28T03:29:50.639Z",
+      "username": "test2",
+      "email": "test2@gmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "userAccess.customuser",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$zFg1Xt5gVg8dDqIgJEHV0h$yI+oHAclFkwzrbApCpDLrZtuITq0eSMLkOv6JK2dGfU=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-07-28T06:02:29.589Z",
+      "username": "test3",
+      "email": "test3@gmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "userAccess.customuser",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$iNYSb0iYodkYMuux9AuJyw$DBI9XEpA4PHS/9EZb/ckx2sGRbGBGeK48izTDQZwubc=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2022-07-28T07:11:25.075Z",
+      "username": "test4",
+      "email": "test4@gmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "api.budget",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "name": "budget1"
+    }
+  },
+  {
+    "model": "api.budget",
+    "pk": 3,
+    "fields": {
+      "user": 5,
+      "name": "budget3"
+    }
+  },
+  {
+    "model": "api.budget",
+    "pk": 4,
+    "fields": {
+      "user": 7,
+      "name": "bud random"
+    }
+  },
+  {
+    "model": "api.budget",
+    "pk": 5,
+    "fields": {
+      "user": 4,
+      "name": "1st user budget"
+    }
+  },
+  {
+    "model": "api.budget",
+    "pk": 6,
+    "fields": {
+      "user": 4,
+      "name": "testname"
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 19,
+    "fields": {
+      "budget": 1,
+      "shared_with": 6
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 23,
+    "fields": {
+      "budget": 3,
+      "shared_with": 6
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 24,
+    "fields": {
+      "budget": 3,
+      "shared_with": 4
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 25,
+    "fields": {
+      "budget": 4,
+      "shared_with": 4
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 26,
+    "fields": {
+      "budget": 5,
+      "shared_with": 7
+    }
+  },
+  {
+    "model": "api.share",
+    "pk": 30,
+    "fields": {
+      "budget": 1,
+      "shared_with": 5
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 3,
+    "fields": {
+      "budget": 1,
+      "itemName": "funds",
+      "type": 1,
+      "income": 100,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 4,
+    "fields": {
+      "budget": 1,
+      "itemName": "buy tea",
+      "type": 2,
+      "income": null,
+      "expense": 10
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 5,
+    "fields": {
+      "budget": 4,
+      "itemName": "fund",
+      "type": 1,
+      "income": 200,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 6,
+    "fields": {
+      "budget": 4,
+      "itemName": "tea",
+      "type": 2,
+      "income": null,
+      "expense": 10
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 8,
+    "fields": {
+      "budget": 3,
+      "itemName": "bank cheque",
+      "type": 1,
+      "income": 1000,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 9,
+    "fields": {
+      "budget": 5,
+      "itemName": "xx",
+      "type": 1,
+      "income": 10000,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 10,
+    "fields": {
+      "budget": 6,
+      "itemName": "salary",
+      "type": 1,
+      "income": 1000,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 11,
+    "fields": {
+      "budget": 6,
+      "itemName": "salary",
+      "type": 1,
+      "income": 1000,
+      "expense": null
+    }
+  },
+  {
+    "model": "api.item",
+    "pk": 19,
+    "fields": {
+      "budget": 6,
+      "itemName": "salary",
+      "type": 1,
+      "income": 1000,
+      "expense": null
+    }
+  }
+]

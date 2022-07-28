@@ -1,8 +1,10 @@
+from django.db import IntegrityError
 from rest_framework.views import APIView
 from .serializers import budgetSerializer, customUserSerializer, itemSerializer, shareSerializer
 from rest_framework.response import Response
 from userAccess.models import CustomUser
-from rest_framework.exceptions import AuthenticationFailed, NotFound
+from rest_framework.exceptions import AuthenticationFailed, NotFound, NotAcceptable
+from django.core.exceptions import BadRequest
 import jwt
 import datetime
 import os
@@ -551,3 +553,71 @@ class addBudget(CreateModelMixin1, generics.CreateAPIView):
     serializer_class = budgetSerializer
     # lookup_field="id"
 
+
+# custom create model mixin
+#api_settings = APISettings(None, DEFAULTS, IMPORT_STRINGS)
+class CreateModelMixin2:
+    """
+    Create a model instance.
+    """
+
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        token = self.request.COOKIES.get('jwt')
+        payload = autheticator(token)
+
+        # finding budget object via id provided.
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        serializer = customUserSerializer(users)
+
+        # finding if the user has access to the budget
+        budget = Budget.objects.filter(
+            id=request.data["budget"], user_id=serializer.data["id"])
+        if not budget:
+            raise NotFound("the entered id is not found on your budgets")
+        if request.data["type"] == "income":
+            request.data["type"] = 1
+        elif request.data["type"] == "expense":
+            request.data["type"] = 2
+        else:
+            raise BadRequest("type format specified is invalid.")
+
+        # sample
+        # "itemName": "salary",
+        # "type": "income",
+        # "income": "1000",
+        # "expense": null,
+        # "budget_id": 6
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            self.perform_create(serializer)
+        except IntegrityError:
+            raise NotAcceptable("integrity compromised")
+
+        # creating a custom response to show to user.
+        response = Response()
+        response.data = {
+            'message': 'budget items added successfully',
+        }
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(response.data, status=status.HTTP_201_CREATED, headers=headers)
+        # return response
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def get_success_headers(self, data):
+        try:
+            return {'Location': str(data[api_settings.URL_FIELD_NAME])}
+        except (TypeError, KeyError):
+            return {}
+
+
+class addBudgetItemById(CreateModelMixin2, generics.CreateAPIView):
+    "All done via custom model mixin"
+    serializer_class = itemSerializer
+    # lookup_field="id"
