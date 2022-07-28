@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from userAccess.models import CustomUser
+from .models import Budget, Item
 
 
 class customUserSerializer(serializers.ModelSerializer):
@@ -18,3 +19,15 @@ class customUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)  # hashing password.
         instance.save()
         return instance
+
+
+class itemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = '__all__'
+
+
+class budgetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Budget
+        fields = '__all__'

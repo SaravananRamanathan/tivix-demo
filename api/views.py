@@ -1,15 +1,31 @@
 from rest_framework.views import APIView
-from .serializers import customUserSerializer
+from .serializers import budgetSerializer, customUserSerializer, itemSerializer
 from rest_framework.response import Response
 from userAccess.models import CustomUser
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, NotFound
 import jwt
 import datetime
 import os
 from dotenv import load_dotenv
+from rest_framework import generics
+from .models import Budget
 
 load_dotenv()  # loading from .env from root folder.
 JWT_SECRET = os.environ.get("JWT_SECRET")
+
+
+def autheticator(token):
+    "token validation."
+    if not token:
+        raise AuthenticationFailed("Not authenticated.")
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithm=['HS256'])
+    except jwt.exceptions.ExpiredSignatureError:
+        raise AuthenticationFailed("Jwt Token expired")
+    except jwt.exceptions.InvalidSignatureError:
+        raise AuthenticationFailed("Incorrect Token Provided")
+
+    return payload
 
 
 class test(APIView):
@@ -72,14 +88,7 @@ class userView(APIView):
         "ping...pong!"
         token = request.COOKIES.get('jwt')
 
-        if not token:
-            raise AuthenticationFailed("Not authenticated.")
-        try:
-            payload = jwt.decode(token, JWT_SECRET, algorithm=['HS256'])
-        except jwt.exceptions.ExpiredSignatureError:
-            raise AuthenticationFailed("Jwt Token expired")
-        except jwt.exceptions.InvalidSignatureError:
-            raise AuthenticationFailed("Incorrect Token Provided")
+        payload = autheticator(token)
 
         user = CustomUser.objects.filter(id=payload['id']).first()
         serializer = customUserSerializer(user)
@@ -96,3 +105,43 @@ class signOut(APIView):
             'message': 'logged out.'
         }
         return response
+
+
+class getAllBudgets(generics.ListAPIView):
+    serializer_class = budgetSerializer
+
+    def get_queryset(self):
+        token = self.request.COOKIES.get('jwt')
+
+        payload = autheticator(token)
+
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        serializer = customUserSerializer(users)
+        budget = Budget.objects.filter(user_id=serializer.data['id'])
+        print(budget)
+
+        return budget  # Product.objects.get(user=user)
+
+
+class getBudgetDetailsById(generics.ListCreateAPIView):
+    serializer_class = itemSerializer
+
+    def get_queryset(self):
+        token = self.request.COOKIES.get('jwt')
+
+        payload = autheticator(token)
+
+        users = CustomUser.objects.filter(id=payload['id']).first()
+        # print(users) #test ok
+        serializer = customUserSerializer(users)
+        # print(serializer.data['id'])  #test ok
+        # print(self.kwargs['id'])   #test ok
+
+        budget = Budget.objects.filter(
+            user_id=serializer.data['id'], id=self.kwargs['id'])
+        if not budget:
+            ""
+            raise NotFound("You dont have access to any budget with that id.")
+        # print(budget) #test ok!..!
+        print(budget[0].item_set.all())
+        return budget[0].item_set.all()
