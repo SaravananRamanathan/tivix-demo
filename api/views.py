@@ -309,7 +309,7 @@ api_settings = APISettings(None, DEFAULTS, IMPORT_STRINGS)
 
 class CreateModelMixin:
     """
-    Create a model instance.
+    Create a model instance. --share.
     """
 
     def create(self, request, *args, **kwargs):
@@ -320,6 +320,12 @@ class CreateModelMixin:
         # finding budget object via id provided.
         users = CustomUser.objects.filter(id=payload['id']).first()
         serializer = customUserSerializer(users)
+        if 'budget' not in request.data:
+            raise NotAcceptable(
+                "The json body does not seem to have 'budget'.")
+        if 'share_with' not in request.data:
+            raise NotAcceptable(
+                "The json bnody does not seem to have 'share_with'")
         budget = Budget.objects.filter(
             user_id=serializer.data['id'], id=request.data['budget'])
         if not budget:
@@ -330,11 +336,15 @@ class CreateModelMixin:
         request.data['budget'] = budget[0].pk
 
         # finding id via email provided.
-        email = CustomUser.objects.filter(email=request.data["shared_with"])
+        email = CustomUser.objects.filter(email=request.data["share_with"])
         if not email:
             raise NotFound("No user with that email provided")
         print(email[0].pk)
-        request.data['shared_with'] = email[0].pk
+        request.data['share_with'] = email[0].pk
+
+        # since serializer is still using shared_with
+        # TODO: this is bad, need to fix the shared_with at backend if wanting to change it as share_with
+        request.data["shared_with"] = request.data["share_with"]
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -344,7 +354,7 @@ class CreateModelMixin:
         # creating a custom response to show to user.
         response = Response()
         response.data = {
-            'message': 'added successfully',
+            'message': 'shared successfully',
             'shared_with': email[0].email
         }
         headers = self.get_success_headers(serializer.data)
